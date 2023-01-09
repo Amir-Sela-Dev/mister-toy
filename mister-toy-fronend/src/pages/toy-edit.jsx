@@ -1,5 +1,5 @@
 
-import { toyService } from "../services/toy.service.local.js"
+import { toyService } from "../services/toy.service.js"
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
@@ -37,7 +37,6 @@ export function ToyEdit() {
         toy = { ...toy, [field]: value }
         console.log(toy);
         dispatch({ type: SET_TOY, toy })
-        saveToy(toy)
     }
 
     function onSaveToy(ev) {

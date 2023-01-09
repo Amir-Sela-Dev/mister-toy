@@ -5,16 +5,16 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { toyService } from '../services/toy.service.local.js'
+import { toyService } from '../services/toy.service.js'
 import { loadToys, removeToy, saveToy } from '../store/toy.action.js'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 import { ToyList } from '../cmps/toy-list.jsx'
 import { ToyFilter } from '../cmps/toy-filter.jsx'
+import { NavLink } from 'react-router-dom'
 
 export function ToyIndex() {
     const { toys } = useSelector((storeState) => storeState.toyModule)
 
-    console.log(toys);
     useEffect(() => {
         onLoadToys()
     }, [])
@@ -66,7 +66,6 @@ export function ToyIndex() {
 
 
     function setFilter(filterBy) {
-        console.log('setFilter', filterBy)
         onLoadToys(filterBy)
     }
 
@@ -74,6 +73,8 @@ export function ToyIndex() {
         <h3>Toys App</h3>
         <main>
             <button onClick={onAddToy}>Add random Toy ⛐</button>
+            <NavLink to={`/toy/edit/1`}>Add toy!</NavLink>
+
             <ToyFilter onSetFilter={setFilter} />
 
             <ToyList

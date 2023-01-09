@@ -4,7 +4,6 @@
     "price": 100,
     "labels": [
       "Doll",
-      "Battery Powered",
       "Baby"
     ],
     "createdAt": 1673280671743,
@@ -16,9 +15,7 @@
     "name": "Star wars",
     "price": 150,
     "labels": [
-      "Doll",
-      "Battery Powered",
-      "Baby"
+      "Box game"
     ],
     "createdAt": 1673280671743,
     "inStock": true,
@@ -29,9 +26,8 @@
     "name": "Lego",
     "price": 300,
     "labels": [
-      "Doll",
-      "Battery Powered",
-      "Baby"
+      "Box game",
+      "Puzzle"
     ],
     "createdAt": 1673280671743,
     "inStock": true,
@@ -42,13 +38,51 @@
     "name": "Boba",
     "price": 50,
     "labels": [
+      "Battery Powered",
+      "Doll"
+    ],
+    "createdAt": 1673280671743,
+    "inStock": false,
+    "imgName": "Boba",
+    "_id": "FBnxiO"
+  },
+  {
+    "name": "Toy-817",
+    "price": 8037,
+    "labels": [
       "Doll",
       "Battery Powered",
       "Baby"
     ],
-    "createdAt": 1673280671743,
+    "createdAt": "",
     "inStock": true,
-    "imgName": "Boba",
-    "_id": "FBnxiO"
+    "imgName": "",
+    "_id": "0g6EN"
+  },
+  {
+    "name": "Toy-647",
+    "price": 8559,
+    "labels": [
+      "Doll",
+      "Battery Powered",
+      "Baby"
+    ],
+    "createdAt": "",
+    "inStock": true,
+    "imgName": "",
+    "_id": "pyiJN"
+  },
+  {
+    "name": "toy name",
+    "price": 111,
+    "labels": [
+      "Doll",
+      "Battery Powered",
+      "Baby"
+    ],
+    "createdAt": "",
+    "inStock": true,
+    "imgName": "",
+    "_id": "EdqCR"
   }
 ]

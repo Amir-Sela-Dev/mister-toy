@@ -12,6 +12,9 @@ module.exports = {
 
 function query(filterBy) {
     filterBy.price = +filterBy.price
+    filterBy.lables = JSON.parse(filterBy.lables)
+    if (filterBy.inStock === 'false') filterBy.inStock = false
+    if (filterBy.inStock === 'true') filterBy.inStock = true
     let filteredToys = toys
     if (filterBy.name) {
         const regex = new RegExp(filterBy.name, 'i')
@@ -20,6 +23,15 @@ function query(filterBy) {
     if (filterBy.price) {
         filteredToys = filteredToys.filter(toy => toy.price <= filterBy.price)
     }
+    if (filterBy.inStock !== undefined && filterBy.inStock !== '') {
+        filteredToys = filteredToys.filter(toy => toy.inStock === filterBy.inStock)
+    }
+    if (filterBy.lables.length) {
+        const lables = filterBy.lables
+        console.log(lables);
+        filteredToys = filteredToys.filter(toy => lables.some(l => toy.labels.includes(l)))
+    }
+
     return Promise.resolve(filteredToys)
 }
 
