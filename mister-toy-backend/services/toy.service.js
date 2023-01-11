@@ -11,6 +11,7 @@ module.exports = {
 }
 
 function query(filterBy) {
+    // filterBy = JSON.parse(filterBy)
     filterBy.price = +filterBy.price
     filterBy.lables = JSON.parse(filterBy.lables)
     if (filterBy.inStock === 'false') filterBy.inStock = false
@@ -29,7 +30,7 @@ function query(filterBy) {
     if (filterBy.lables.length) {
         const lables = filterBy.lables
         console.log(lables);
-        filteredToys = filteredToys.filter(toy => lables.some(l => toy.labels.includes(l)))
+        filteredToys = filteredToys.filter(toy => lables.every(l => toy.labels.includes(l)))
     }
 
     return Promise.resolve(filteredToys)

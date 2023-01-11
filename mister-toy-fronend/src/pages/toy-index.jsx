@@ -14,7 +14,7 @@ import { NavLink } from 'react-router-dom'
 
 export function ToyIndex() {
     const { toys } = useSelector((storeState) => storeState.toyModule)
-
+    // console.log(toys);
     useEffect(() => {
         onLoadToys()
     }, [])
@@ -70,11 +70,15 @@ export function ToyIndex() {
     }
 
     return <section className='toy-main-index'>
-        <h3>Toys App</h3>
-        <main>
-            <button onClick={onAddToy}>Add random Toy ⛐</button>
-            <NavLink to={`/toy/edit/1`}>Add toy!</NavLink>
+        <div className="first-row">
+            <h3>Toys & Joys shop</h3>
+            <div className="add-btns">
+                <button className='btn' onClick={onAddToy}>Add random Toy ⛐</button>
+                <NavLink className='btn' to={`/toy/edit`}>Add toy!</NavLink>
+            </div>
+        </div>
 
+        <main>
             <ToyFilter onSetFilter={setFilter} />
 
             <ToyList

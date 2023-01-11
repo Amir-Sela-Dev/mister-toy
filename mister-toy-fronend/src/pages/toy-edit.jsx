@@ -1,84 +1,119 @@
+import { Link, Navigate, useNavigate, useParams } from 'react-router-dom'
+import { useEffect, useRef, useState } from 'react'
+import Select from 'react-select'
+import { Formik, Form, Field } from 'formik'
+import * as Yup from 'yup'
 
-import { toyService } from "../services/toy.service.js"
-import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
-import { Link, useNavigate, useParams } from "react-router-dom"
-import { useEffect, useState } from "react"
-import { loadToy, saveToy } from "../store/toy.action.js"
-import { useDispatch, useSelector } from "react-redux"
-import { SET_TOY } from '../store/toy.reducer.js'
-
+import { toyService } from '../services/toy.service.js'
+import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
+import { saveToy } from '../store/toy.action.js'
 
 export function ToyEdit() {
+    ////////////////////////////////////////////////////////////////////////////////////
+
     const [toyToEdit, setToyToEdit] = useState(toyService.getEmptyToy())
-    let { toy } = useSelector((storeState) => storeState.toyModule)
-    const dispatch = useDispatch()
+    const [selectedOptions, setSelectedOptions] = useState()
 
     const navigate = useNavigate()
     const { toyId } = useParams()
 
     useEffect(() => {
         if (!toyId) return
-        loadToy(toyId)
+        loadToy()
     }, [])
 
-    // function loadToy() {
-    //     toyService.getById(toyId)
-    //         .then(setToyToEdit)
-    //         .catch((err) => {
-    //             console.log('Had issues in toy details', err)
-    //             navigate('/toy')
-    //         })
-    // }
-
-    function handleChange({ target }) {
-        let { value, type, name: field } = target
-        value = type === 'number' ? +value : value
-        // setToyToEdit((prevToy) => ({ ...prevToy, [field]: value }))
-        toy = { ...toy, [field]: value }
-        console.log(toy);
-        dispatch({ type: SET_TOY, toy })
-    }
-
-    function onSaveToy(ev) {
-        ev.preventDefault()
-        dispatch({ type: SET_TOY, toy })
-        saveToy(toy)
-            .then((toy) => {
-                console.log('toy saved', toy);
-                showSuccessMsg('Toy saved!')
+    console.log(toyToEdit);
+    function loadToy() {
+        toyService
+            .get(toyId)
+            .then((toy) => setToyToEdit(toy))
+            .catch((err) => {
+                console.log('Had issues in toy details', err)
                 navigate('/toy')
             })
-            .catch(err => {
-                console.log('err', err)
-                showErrorMsg('Cannot save toy')
+    }
+
+    function handleChange({ target }) {
+        let { value, name: field, type } = target
+        value = type === 'number' ? +value : value
+        setToyToEdit((prevToy) => {
+            return { ...prevToy, [field]: value }
+        })
+    }
+
+    function handleSelect(data) {
+        setSelectedOptions(data)
+        const labelsToSet = data.length ? data.map((i) => i.value) : []
+        console.log(labelsToSet)
+        setToyToEdit((prevToy) => ({ ...prevToy, labels: labelsToSet }))
+    }
+
+    function onAddToy(values) {
+        // ev.preventDefault()
+        const labels = selectedOptions.map((option) => option.label)
+        const toyToSave = {
+            ...toyToEdit,
+            ...values,
+            labels,
+        }
+        saveToy(toyToSave)
+            .then((savedToy) => {
+                showSuccessMsg(`Toy added (id: ${savedToy._id})`)
+                navigate('/toy')
+            })
+            .catch((err) => {
+                showErrorMsg('Cannot add Toy', err)
             })
     }
 
-    return <section className="toy-edit">
-        <h2>{toy._id ? 'Edit this toy' : 'Add a new toy'}</h2>
+    const SignupSchema = Yup.object().shape({
+        name: Yup.string().min(2, 'Too Short!').max(20, 'Too Long!').required('Required'),
+        price: Yup.string().min(2, 'Too Short!').max(4, 'Too Long!').required('Required'),
+    })
 
-        <form onSubmit={onSaveToy}>
-            <label htmlFor="name">Name : </label>
-            <input type="text"
-                name="name"
-                id="name"
-                placeholder="Enter name..."
-                value={toy.name}
-                onChange={handleChange}
-            />
-            <label htmlFor="price">Price : </label>
-            <input type="number"
-                name="price"
-                id="price"
-                placeholder="Enter price"
-                value={toy.price}
-                onChange={handleChange}
-            />
+    const h1Props = {
+        style: { color: 'red' },
+        title: 'Hello im a Title',
+    }
 
-            <div>
-                <button>{toy._id ? 'Save' : 'Add'}</button>
-                <Link to="/toy">Cancel</Link>
-            </div>
-        </form>
-    </section>
+    return (
+        <section className="toy-edit">
+            {/* <h1 title="Hello im an h1" style={{color:'red'}}>Signup</h1> */}
+            <h1 {...h1Props}>Add Toy</h1>
+            <Formik
+                initialValues={{
+                    name: '',
+                    price: '',
+                    labels: [],
+                }}
+                validationSchema={SignupSchema}
+                onSubmit={onAddToy}
+            >
+                {({ errors, touched }) => (
+                    <Form className="name">
+                        <Field name="name" id="name" placeholder="Toy Name" />
+                        {errors.name && touched.name ? <span>{errors.name}</span> : null}
+
+                        <Field name="price" id="price" placeholder="Toy Price" />
+                        {errors.price && touched.price ? <div>{errors.price}</div> : null}
+
+                        <Select
+                            name="labels"
+                            options={toyService.getToyLabels().map((label) => ({ value: label, label }))}
+                            value={selectedOptions}
+                            onChange={handleSelect}
+                            placeholder="Select labels"
+                            isMulti={true}
+                        />
+
+                        <button type="submit">Save Toy</button>
+                    </Form>
+                )}
+            </Formik>
+
+            <Link className="nice-link" to="/toy">
+                Cancel
+            </Link>
+        </section>
+    )
 }

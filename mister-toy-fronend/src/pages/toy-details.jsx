@@ -1,3 +1,4 @@
+import React from 'react';
 
 import { toyService } from "../services/toy.service.local.js"
 import { showErrorMsg } from "../services/event-bus.service.js"

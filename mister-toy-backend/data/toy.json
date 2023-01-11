@@ -4,6 +4,7 @@
     "price": 100,
     "labels": [
       "Doll",
+      "Battery Powered",
       "Baby"
     ],
     "createdAt": 1673280671743,
@@ -15,7 +16,9 @@
     "name": "Star wars",
     "price": 150,
     "labels": [
-      "Box game"
+      "Doll",
+      "Battery Powered",
+      "Baby"
     ],
     "createdAt": 1673280671743,
     "inStock": true,
@@ -26,8 +29,9 @@
     "name": "Lego",
     "price": 300,
     "labels": [
-      "Box game",
-      "Puzzle"
+      "Doll",
+      "Battery Powered",
+      "Baby"
     ],
     "createdAt": 1673280671743,
     "inStock": true,
@@ -38,17 +42,18 @@
     "name": "Boba",
     "price": 50,
     "labels": [
+      "Doll",
       "Battery Powered",
-      "Doll"
+      "Baby"
     ],
     "createdAt": 1673280671743,
-    "inStock": false,
+    "inStock": true,
     "imgName": "Boba",
     "_id": "FBnxiO"
   },
   {
-    "name": "Toy-817",
-    "price": 8037,
+    "name": "Toy-672",
+    "price": 5076,
     "labels": [
       "Doll",
       "Battery Powered",
@@ -57,11 +62,11 @@
     "createdAt": "",
     "inStock": true,
     "imgName": "",
-    "_id": "0g6EN"
+    "_id": "XKffU"
   },
   {
-    "name": "Toy-647",
-    "price": 8559,
+    "name": "Toy-36",
+    "price": 6905,
     "labels": [
       "Doll",
       "Battery Powered",
@@ -70,11 +75,11 @@
     "createdAt": "",
     "inStock": true,
     "imgName": "",
-    "_id": "pyiJN"
+    "_id": "UycqI"
   },
   {
-    "name": "toy name",
-    "price": 111,
+    "name": "Toy-369",
+    "price": 2270,
     "labels": [
       "Doll",
       "Battery Powered",
@@ -83,6 +88,58 @@
     "createdAt": "",
     "inStock": true,
     "imgName": "",
-    "_id": "EdqCR"
+    "_id": "zUIU4"
+  },
+  {
+    "name": "Toy-580",
+    "price": 3184,
+    "labels": [
+      "Doll",
+      "Battery Powered",
+      "Baby"
+    ],
+    "createdAt": "",
+    "inStock": true,
+    "imgName": "",
+    "_id": "idlaA"
+  },
+  {
+    "name": "Toy-743",
+    "price": 5171,
+    "labels": [
+      "Doll",
+      "Battery Powered",
+      "Baby"
+    ],
+    "createdAt": "",
+    "inStock": true,
+    "imgName": "",
+    "_id": "M669i"
+  },
+  {
+    "name": "Toy-609",
+    "price": 8451,
+    "labels": [
+      "Doll",
+      "Battery Powered",
+      "Baby"
+    ],
+    "createdAt": "",
+    "inStock": true,
+    "imgName": "",
+    "_id": "vsNQb"
+  },
+  {
+    "name": "Toy-879",
+    "price": 7706,
+    "labels": [
+      "Doll",
+      "Battery Powered",
+      "Baby"
+    ],
+    "createdAt": "",
+    "inStock": true,
+    "imgName": "",
+    "_id": "nQ9tH"
   }
 ]

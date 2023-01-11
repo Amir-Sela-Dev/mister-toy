@@ -2,11 +2,9 @@
 // const { useSelector, useDispatch } = ReactRedux
 
 import { UserMsg } from './user-msg.jsx'
-import { useDispatch, useSelector } from 'react-redux'
 
 export function AppFooter() {
 
-    const dispatch = useDispatch()
 
     // TODO: move to storeState
 
@@ -15,7 +13,7 @@ export function AppFooter() {
     return (
         <footer>
             <p>
-                Coffeerights to all
+                {/* Coffeerights to all */}
             </p>
             <UserMsg />
         </footer>

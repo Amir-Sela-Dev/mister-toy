@@ -3,19 +3,20 @@
 @import "setup/typography.css";
 
 /* Base */
-@import "base/base.css";
-@import "base/helpers.css";
-@import "base/layout.css";
-@import "base/forms.css";
+/* @import "base/base.css"; */
+/* @import "base/helpers.css"; */
+/* @import "base/layout.css"; */
+/* @import "base/forms.css"; */
 
 /* Components */
-@import "cmps/app-header.css";
+/* @import "cmps/app-header.css"; */
 @import "cmps/toggle-btn.css";
 @import "cmps/user-msg.css";
 
-@import "cmps/toy-filter.css";
-@import "cmps/toy-list.css";
-@import "cmps/toy-preview.css";
+/* @import "cmps/toy-filter.css"; */
+/* @import "cmps/toy-list.css"; */
+/* @import "cmps/toy-preview.css"; */
 
 /* pages */
-@import "cmps/toy-index.css";
+/* @import "cmps/toy-index.css"; */
+@import "cmps/about.css";

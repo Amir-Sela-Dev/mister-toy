@@ -25,7 +25,7 @@ export function ToyFilter({ onSetFilter }) {
 
     function handleChange({ target }) {
         let { value, name: field, type } = target
-        value = (type === 'number') ? +value : value
+        value = (type === 'number' || type === 'range') ? +value : value
         setFilterByToEdit((prevFilter) => ({ ...prevFilter, [field]: value }))
     }
 
@@ -55,31 +55,40 @@ export function ToyFilter({ onSetFilter }) {
     ];
 
 
+    console.log(filterByToEdit);
 
 
-
-    return <section className="toy-filter full main-layout">
-        <h2>Toys Filter</h2>
+    return <section className="toy-filter">
         <form onSubmit={onSubmitFilter}>
-            <label htmlFor="name">Name:</label>
-            <input type="text"
-                id="name"
-                name="name"
-                placeholder="By name"
-                value={filterByToEdit.name}
-                onChange={handleChange}
-                ref={elInputRef}
-            />
+            <h2>Toys Filter</h2>
+            <div className="filter-category">
+                <label htmlFor="name">Name:</label>
+                <input type="text"
+                    id="name"
+                    name="name"
+                    placeholder="By name"
+                    value={filterByToEdit.name}
+                    onChange={handleChange}
+                    ref={elInputRef}
+                />
+            </div>
+            <hr />
+            <div className="filter-category">
 
-            <label htmlFor="price">Price:</label>
-            <input type="number"
-                id="price"
-                name="price"
-                placeholder="By max price"
-                value={filterByToEdit.price}
-                onChange={handleChange}
-            />
-
+                <label htmlFor="price">Price:</label>
+                <span>${filterByToEdit.price}</span>
+                <input type="range"
+                    min={0}
+                    max={1000}
+                    id="price"
+                    name="price"
+                    placeholder="By max price"
+                    value={filterByToEdit.price}
+                    onChange={handleChange}
+                />
+            </div>
+            <hr />
+            <label htmlFor="inStock">In stock</label>
             <select
                 className="inStock"
                 name='inStock'
@@ -90,8 +99,10 @@ export function ToyFilter({ onSetFilter }) {
                 <option value={true}>In stock</option>
                 <option value={false}>Out of stock</option>
             </select>
-            <div>
-                <h1>Select lables</h1>
+            <hr />
+
+            <div className="">
+                <label htmlFor="MultiSelect"> Select category</label>
                 <MultiSelect
                     options={options}
                     value={selected}
@@ -99,11 +110,7 @@ export function ToyFilter({ onSetFilter }) {
                     labelledBy="Select"
                 />
             </div>
-
-
-
-
-            <button hidden>Filter</button>
+            <hr />
         </form>
 
     </section>

@@ -17,7 +17,9 @@ export const toyService = {
     getEmptyToy,
     getDefaultFilter,
     getRandomToy,
-    getById
+    getById,
+    getToysTypeNum,
+    getToyLabels
 }
 
 function query(filterBy = getDefaultFilter()) {
@@ -53,6 +55,27 @@ function getRandomToy() {
     return toy
 }
 
+function getToysTypeNum() {
+    let toysTypeNum = {}
+    query()
+        .then(toys => {
+            toys.forEach(toy => {
+                toy.labels.forEach(lable => {
+                    if (!toysTypeNum[lable]) {
+                        toysTypeNum[lable] = 1
+                    } else {
+                        toysTypeNum[lable] += 1
+                    }
+                    return toysTypeNum
+                })
+
+            })
+            console.log('toysTypeNum', toysTypeNum)
+        })
+    console.log('toysTypeNum', toysTypeNum)
+    return toysTypeNum
+}
+
 function getEmptyToy(name = '', price = '') {
     var toy = {
         name,
@@ -67,6 +90,11 @@ function getEmptyToy(name = '', price = '') {
 
 function getDefaultFilter() {
     return { name: '', price: '', inStock: '', lables: [] }
+}
+
+function getToyLabels() {
+    const labels = ["On wheels", "Box game", "Art", "Baby", "Doll", "Puzzle", "Outdoor", "Battery Powered"]
+    return labels
 }
 
 function _createToys() {
