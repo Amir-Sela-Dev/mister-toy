@@ -23,14 +23,14 @@ export function ToyEdit() {
     }, [])
 
     console.log(toyToEdit);
-    function loadToy() {
-        toyService
-            .get(toyId)
-            .then((toy) => setToyToEdit(toy))
-            .catch((err) => {
-                console.log('Had issues in toy details', err)
-                navigate('/toy')
-            })
+    async function loadToy() {
+        try {
+            const toy = await toyService.get(toyId)
+            setToyToEdit(toy)
+        } catch (err) {
+            console.log('Had issues in toy details', err)
+            navigate('/toy')
+        }
     }
 
     function handleChange({ target }) {
@@ -47,8 +47,7 @@ export function ToyEdit() {
         console.log(labelsToSet)
         setToyToEdit((prevToy) => ({ ...prevToy, labels: labelsToSet }))
     }
-
-    function onAddToy(values) {
+    async function onAddToy(values) {
         // ev.preventDefault()
         const labels = selectedOptions.map((option) => option.label)
         const toyToSave = {
@@ -56,14 +55,13 @@ export function ToyEdit() {
             ...values,
             labels,
         }
-        saveToy(toyToSave)
-            .then((savedToy) => {
-                showSuccessMsg(`Toy added (id: ${savedToy._id})`)
-                navigate('/toy')
-            })
-            .catch((err) => {
-                showErrorMsg('Cannot add Toy', err)
-            })
+        const savedToy = await saveToy(toyToSave)
+        try {
+            showSuccessMsg(`Toy added (id: ${savedToy._id})`)
+            navigate('/toy')
+        } catch (err) {
+            showErrorMsg('Cannot add Toy', err)
+        }
     }
 
     const SignupSchema = Yup.object().shape({
@@ -83,7 +81,7 @@ export function ToyEdit() {
             <Formik
                 initialValues={{
                     name: '',
-                    price: '',
+                    price: 0,
                     labels: [],
                 }}
                 validationSchema={SignupSchema}

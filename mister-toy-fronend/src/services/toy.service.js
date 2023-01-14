@@ -50,7 +50,7 @@ function getById(toyId) {
 
 function getRandomToy() {
     var toy = getEmptyToy()
-    toy.price = utilService.getRandomIntInclusive(1000, 9000)
+    toy.price = utilService.getRandomIntInclusive(10, 900)
     toy.name = 'Toy-' + (Date.now() % 1000)
     return toy
 }
@@ -80,7 +80,7 @@ function getEmptyToy(name = '', price = '') {
     var toy = {
         name,
         price,
-        labels: ["Doll", "Battery Powered", "Baby"],
+        lables: ["Doll", "Battery Powered", "Baby"],
         createdAt: '',
         inStock: true,
         imgName: name

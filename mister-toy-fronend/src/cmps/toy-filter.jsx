@@ -79,7 +79,7 @@ export function ToyFilter({ onSetFilter }) {
                 <span>${filterByToEdit.price}</span>
                 <input type="range"
                     min={0}
-                    max={1000}
+                    max={1200}
                     id="price"
                     name="price"
                     placeholder="By max price"

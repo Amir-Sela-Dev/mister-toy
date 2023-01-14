@@ -11,7 +11,9 @@ ChartJS.register(RadialLinearScale, ArcElement, Tooltip, Legend);
 export function Dashboard() {
     const [toysTypeNum, setToysTypeNum] = useState({})
     const [toysAvgPrice, setToysAvgPrice] = useState({})
-    let { toys } = useSelector((storeState) => storeState.toyModule)
+    // let { toys } = useSelector((storeState) => storeState.toyModule)
+    const { toys } = useSelector((storeState) => storeState.toyModule)
+
     useEffect(() => {
         loadToys()
     }, [])
@@ -26,9 +28,11 @@ export function Dashboard() {
 
     function getToysTypeNum() {
         let toysTypeNum = {}
+        console.log(toys);
+        if (!toys) return
 
         toys.forEach(toy => {
-            toy.labels.forEach(lable => {
+            toy.lables.forEach(lable => {
                 if (!toysTypeNum[lable]) {
                     toysTypeNum[lable] = 1
                 } else {
@@ -38,13 +42,12 @@ export function Dashboard() {
             })
         })
         setToysTypeNum(toysTypeNum)
-
         let toysAvgPrice = {}
 
         let toysLables = Object.keys(toysTypeNum)
         console.log(toysLables);
         toysLables.forEach(type => {
-            let filteredToys = toys.filter(toy => toy.labels.includes(type))
+            let filteredToys = toys.filter(toy => toy.lables.includes(type))
             console.log(filteredToys);
             let count = 0
             let avg = 0
@@ -61,8 +64,9 @@ export function Dashboard() {
 
 
 
+
     const data = {
-        labels: Object.keys(toysTypeNum),
+        lables: Object.keys(toysTypeNum),
         datasets: [
             {
                 label: 'Inventory by type',
@@ -93,7 +97,7 @@ export function Dashboard() {
         ],
     };
     const priceData = {
-        labels: Object.keys(toysAvgPrice),
+        lables: Object.keys(toysAvgPrice),
         datasets: [
             {
                 label: 'Avg price of type in $',

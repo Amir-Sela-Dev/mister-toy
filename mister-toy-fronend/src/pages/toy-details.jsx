@@ -14,19 +14,14 @@ export function ToyDetails() {
     const { toyId } = useParams()
     const navigate = useNavigate()
 
+    let imgUrl = `${toy.imgName}.png`
+    if (!toy.imgName) imgUrl = 'toy.jpg'
+
+
     useEffect(() => {
         loadToy(toyId)
     }, [])
 
-    // function loadToy() {
-    //     toyService.getById(toyId)
-    //         .then((toy) => setToy(toy))
-    //         .catch((err) => {
-    //             console.log('Had issues in toy details', err)
-    //             showErrorMsg('Cannot load toy')
-    //             navigate('/toy')
-    //         })
-    // }
 
     if (!toy) return <div>Loading...</div>
 
@@ -34,7 +29,8 @@ export function ToyDetails() {
 
     return <section className="toy-details">
         <h1>Toy vendor : {name}</h1>
-        <h5>Price: ${price}</h5>
+        <h3>Price: ${price}</h3>
+        <img src={require(`../assets/img/${imgUrl}`)} />
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi voluptas cumque tempore, aperiam sed dolorum rem! Nemo quidem, placeat perferendis tempora aspernatur sit, explicabo veritatis corrupti perspiciatis repellat, enim quibusdam!</p>
         <Link to={`/toy/edit/${_id}`}>Edit</Link>
     </section>
