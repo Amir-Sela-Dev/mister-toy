@@ -1,0 +1,23 @@
+// SETUP//
+@import 'setups/variables';
+@import 'setups/mixing';
+@import 'setups/functions';
+
+
+// BASICS//
+@import 'basics/helpers';
+@import 'basics/base';
+@import 'basics/layout';
+
+//CMPS//
+@import 'cmps/app-header.scss';
+@import 'cmps/toy-filter.scss';
+@import 'cmps/toy-list.scss';
+@import 'cmps/toy-preview.scss';
+
+
+//VIEWS//
+@import 'views/home-page.scss';
+@import './views/toy-index.scss';
+@import './views/toy-details.scss';
+@import './views/user-details.scss';
