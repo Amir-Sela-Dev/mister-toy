@@ -30,7 +30,6 @@ export function ToyFilter({ onSetFilter }) {
     }
 
     function handleLableChange() {
-        console.log(selected);
         const lables = selected.map(lable => {
             return lable.value
         })
@@ -55,7 +54,6 @@ export function ToyFilter({ onSetFilter }) {
     ];
 
 
-    console.log(filterByToEdit);
 
 
     return <section className="toy-filter">

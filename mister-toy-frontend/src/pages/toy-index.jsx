@@ -1,9 +1,6 @@
-// const { useEffect } = React
-// const { useSelector, useDispatch } = ReactRedux
-// const { Link } = ReactRouterDOM
 
 import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import { toyService } from '../services/toy.service.js'
 import { loadToys, removeToy, saveToy } from '../store/toy.action.js'
@@ -16,7 +13,6 @@ export function ToyIndex() {
     const { toys } = useSelector((storeState) => storeState.toyModule)
     const user = useSelector(storeState => storeState.userModule.user)
 
-    // console.log(toys);
     useEffect(() => {
         onLoadToys()
     }, [])

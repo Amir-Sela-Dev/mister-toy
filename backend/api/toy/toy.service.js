@@ -16,14 +16,12 @@ async function query(filterBy) {
 }
 
 function getFilterBy(filterBy) {
-    console.log('filterBy111', filterBy)
     if (filterBy.inStock === 'false') filterBy.inStock = false
     if (filterBy.inStock === 'true') filterBy.inStock = true
     let lables = JSON.parse(filterBy.lables)
     if (!lables.length) {
         lables = ["On wheels", "Box game", "Art", "Baby", "Doll", "Puzzle", "Outdoor", "Battery Powered"]
     }
-    console.log('filterBy', filterBy)
     const criteria = {
         name: { $regex: filterBy.name, $options: 'i' },
         price: { $lte: +filterBy.price },
@@ -69,10 +67,15 @@ async function add(toy) {
 }
 
 async function update(toy) {
+    console.log(toy);
     try {
         const toyToSave = {
-            vendor: toy.vendor,
-            price: toy.price
+            name: toy.name,
+            price: toy.price,
+            lables: toy.lables,
+            inStock: toy.inStock,
+            imgName: toy.imgName,
+
         }
         const collection = await dbService.getCollection('toys')
         await collection.updateOne({ _id: ObjectId(toy._id) }, { $set: toyToSave })

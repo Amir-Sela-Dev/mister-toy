@@ -35,7 +35,7 @@ async function addToy(req, res) {
 
     try {
         const toy = req.body
-        // toy.owner = loggedinUser
+        toy.owner = loggedinUser
         const addedToy = await toyService.add(toy)
         res.json(addedToy)
     } catch (err) {
@@ -46,6 +46,7 @@ async function addToy(req, res) {
 
 
 async function updateToy(req, res) {
+    console.log('update!!1');
     try {
         const toy = req.body
         const updatedToy = await toyService.update(toy)

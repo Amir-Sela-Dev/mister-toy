@@ -4,10 +4,8 @@ const ObjectId = require('mongodb').ObjectId
 const asyncLocalStorage = require('../../services/als.service')
 
 async function query(filterBy = {}) {
-    console.log(filterBy);
     try {
         const criteria = _buildCriteria(filterBy)
-        console.log('criteria', criteria);
         const collection = await dbService.getCollection('review')
         // const reviews = await collection.find(criteria).toArray()
         var reviews = await collection.aggregate([
@@ -40,7 +38,6 @@ async function query(filterBy = {}) {
             }
         ]).toArray()
         reviews = reviews.map(review => {
-            console.log(review);
 
             review.byUser = { _id: review.byUser._id, fullname: review.byUser.fullname }
             review.aboutToy = { _id: review.aboutToy._id, fullname: review.aboutToy.name }
@@ -75,7 +72,6 @@ async function remove(reviewId) {
 
 
 async function add(review) {
-    console.log('review', review);
     try {
         const reviewToAdd = {
             byUserId: ObjectId(review.byUserId),

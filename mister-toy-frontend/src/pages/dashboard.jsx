@@ -28,7 +28,6 @@ export function Dashboard() {
 
     function getToysTypeNum() {
         let toysTypeNum = {}
-        console.log(toys);
         if (!toys) return
 
         toys.forEach(toy => {
@@ -45,10 +44,8 @@ export function Dashboard() {
         let toysAvgPrice = {}
 
         let toysLables = Object.keys(toysTypeNum)
-        console.log(toysLables);
         toysLables.forEach(type => {
             let filteredToys = toys.filter(toy => toy.lables.includes(type))
-            console.log(filteredToys);
             let count = 0
             let avg = 0
             filteredToys.forEach(toy => {
@@ -59,11 +56,9 @@ export function Dashboard() {
 
         })
         setToysAvgPrice(toysAvgPrice)
-        console.log(toysAvgPrice);
     }
 
 
-    console.log(toysTypeNum);
 
     const data = {
         labels: Object.keys(toysTypeNum),

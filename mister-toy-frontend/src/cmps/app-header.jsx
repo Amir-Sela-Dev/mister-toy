@@ -57,6 +57,7 @@ export function AppHeader() {
                         <span className="score">{user.score?.toLocaleString()}</span>
                         <button onClick={onLogout}>Logout</button>
                     </span>
+
                 }
                 {!user &&
                     <section className="user-info">

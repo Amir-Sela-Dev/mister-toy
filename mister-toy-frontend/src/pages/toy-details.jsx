@@ -8,6 +8,7 @@ import { loadToy } from "../store/toy.action.js"
 import { useDispatch, useSelector } from 'react-redux'
 import { loadReviews, addReview, removeReview } from '../store/review.actions.js'
 import { reviewService } from '../services/review.service.js';
+import { ChatRoom } from '../cmps/chat-room.jsx';
 
 export function ToyDetails() {
     // const [toy, setToy] = useState(null)
@@ -15,8 +16,8 @@ export function ToyDetails() {
     const loggedInUser = useSelector(storeState => storeState.userModule.user)
     const reviews = useSelector(storeState => storeState.reviewModule.reviews)
     const [reviewToEdit, setReviewToEdit] = useState({ txt: '', aboutToyId: '' })
+    const [isChatOpen, setIsChatOpen] = useState(false)
 
-    console.log(reviewToEdit);
     const { toyId } = useParams()
     const navigate = useNavigate()
 
@@ -119,6 +120,12 @@ export function ToyDetails() {
                 <button>Add</button>
             </form>}
 
+        {(isChatOpen) && <ChatRoom toyId={toyId} setIsChatOpen={setIsChatOpen} isChatOpen={isChatOpen} toy={toy} />
+        }
+        {(!isChatOpen) &&
+            <div className="chat-img" onClick={() => { setIsChatOpen(!isChatOpen) }}>
+            </div>
+        }
 
 
     </section>

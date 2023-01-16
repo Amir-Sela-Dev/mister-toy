@@ -22,7 +22,6 @@ export function ToyEdit() {
         loadToy()
     }, [])
 
-    console.log(toyToEdit);
     async function loadToy() {
         try {
             const toy = await toyService.get(toyId)
@@ -43,17 +42,16 @@ export function ToyEdit() {
 
     function handleSelect(data) {
         setSelectedOptions(data)
-        const labelsToSet = data.length ? data.map((i) => i.value) : []
-        console.log(labelsToSet)
-        setToyToEdit((prevToy) => ({ ...prevToy, labels: labelsToSet }))
+        const lablesToSet = data.length ? data.map((i) => i.value) : []
+        setToyToEdit((prevToy) => ({ ...prevToy, lables: lablesToSet }))
     }
     async function onAddToy(values) {
         // ev.preventDefault()
-        const labels = selectedOptions.map((option) => option.label)
+        const lables = selectedOptions.map((option) => option.label)
         const toyToSave = {
             ...toyToEdit,
             ...values,
-            labels,
+            lables,
         }
         const savedToy = await saveToy(toyToSave)
         try {
@@ -82,7 +80,7 @@ export function ToyEdit() {
                 initialValues={{
                     name: '',
                     price: 0,
-                    labels: [],
+                    lables: [],
                 }}
                 validationSchema={SignupSchema}
                 onSubmit={onAddToy}
@@ -96,11 +94,11 @@ export function ToyEdit() {
                         {errors.price && touched.price ? <div>{errors.price}</div> : null}
 
                         <Select
-                            name="labels"
+                            name="lables"
                             options={toyService.getToyLabels().map((label) => ({ value: label, label }))}
                             value={selectedOptions}
                             onChange={handleSelect}
-                            placeholder="Select labels"
+                            placeholder="Select lables"
                             isMulti={true}
                         />
 
